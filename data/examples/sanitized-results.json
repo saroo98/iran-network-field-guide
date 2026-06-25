@@ -1,0 +1,46 @@
+{
+  "schema": "iran-network-field-guide-results-v1",
+  "privacy": "Sanitized example. No active endpoints, credentials, cookies, import links, QR codes, or private user data.",
+  "results": [
+    {
+      "timestamp_utc": "2026-06-25T00:00:00Z",
+      "route_family": "WebSocket/TLS CDN",
+      "hostname": "EXAMPLE_HOSTNAME",
+      "isp_operator": "EXAMPLE_ISP",
+      "region": "EXAMPLE_REGION",
+      "network_type": "mobile",
+      "client_app": "EXAMPLE_CLIENT_NAME",
+      "client_version": "EXAMPLE_VERSION",
+      "stages": [
+        {
+          "stage": "dns",
+          "status": "ok",
+          "latency_ms": 12,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "tcp",
+          "status": "ok",
+          "latency_ms": 44,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "tls",
+          "status": "ok",
+          "latency_ms": 89,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "http",
+          "status": "ok",
+          "latency_ms": 123,
+          "detail": {
+            "status_code": 200
+          }
+        }
+      ],
+      "error_stage": "none",
+      "failure_label": "works"
+    }
+  ]
+}

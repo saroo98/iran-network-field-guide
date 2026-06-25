@@ -1,0 +1,13 @@
+label: EXAMPLE_CLIENT_PROFILE
+route_family: CDN edge pinning experiment
+connect_address: EXAMPLE_CDN_EDGE_IP
+port: 443
+tls:
+  enabled: true
+  server_name: EXAMPLE_SNI
+http:
+  host_header: EXAMPLE_HOST_HEADER
+  path: EXAMPLE_PATH
+credential_placeholders:
+  uuid: EXAMPLE_UUID
+public_safety: Template only. Not a working profile.

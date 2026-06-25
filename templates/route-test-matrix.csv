@@ -1,0 +1,2 @@
+timestamp_utc,isp_operator,region,network_type,client_app,client_version,route_family,hostname_placeholder,dns_result,tcp_result,tls_result,http_status,http3_result,proxy_result,latency_ms,error_stage,failure_label,notes
+2026-06-25T00:00:00Z,EXAMPLE_ISP,EXAMPLE_REGION,mobile,EXAMPLE_CLIENT_NAME,EXAMPLE_VERSION,WebSocket/TLS CDN,EXAMPLE_HOSTNAME,ok,ok,ok,200,not_tested,ok,123,none,works,Sanitized example row

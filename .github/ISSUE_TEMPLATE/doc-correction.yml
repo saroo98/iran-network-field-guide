@@ -1,0 +1,19 @@
+name: Documentation correction
+description: Correct a claim, evidence label, or compatibility note.
+title: "[docs] "
+labels: ["documentation"]
+body:
+  - type: input
+    id: file
+    attributes:
+      label: File
+      placeholder: "docs/02-censorship-mechanisms.md"
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Correction
+      description: Explain the correction and whether it is confirmed, inferred, or unknown.
+    validations:
+      required: true

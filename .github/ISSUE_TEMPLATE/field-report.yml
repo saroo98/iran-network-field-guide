@@ -1,0 +1,46 @@
+name: Sanitized field report
+description: Share a public-safe connectivity observation.
+title: "[field-report] "
+labels: ["field-report"]
+body:
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety confirmation
+      description: Confirm that live endpoints, credentials, cookies, import links, QR codes, and private user identifiers were removed.
+      placeholder: "I replaced all deployment-specific values with placeholders."
+    validations:
+      required: true
+  - type: input
+    id: isp
+    attributes:
+      label: ISP or operator
+      placeholder: "EXAMPLE_ISP"
+    validations:
+      required: true
+  - type: input
+    id: region
+    attributes:
+      label: Region
+      placeholder: "EXAMPLE_REGION"
+    validations:
+      required: false
+  - type: dropdown
+    id: network_type
+    attributes:
+      label: Network type
+      options:
+        - mobile
+        - fixed
+        - wifi
+        - unknown
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Observation
+      description: Describe symptoms and error stage without live endpoint values.
+      placeholder: "DNS resolved, TCP connected, TLS failed, HTTP fallback did not load."
+    validations:
+      required: true

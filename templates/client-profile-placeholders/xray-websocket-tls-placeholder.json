@@ -1,0 +1,18 @@
+{
+  "label": "EXAMPLE_CLIENT_PROFILE",
+  "route_family": "WebSocket/TLS CDN",
+  "connect_address": "EXAMPLE_HOSTNAME",
+  "port": 443,
+  "tls": {
+    "enabled": true,
+    "server_name": "EXAMPLE_SNI"
+  },
+  "websocket": {
+    "host_header": "EXAMPLE_HOST_HEADER",
+    "path": "EXAMPLE_PATH"
+  },
+  "credential_placeholders": {
+    "uuid": "EXAMPLE_UUID"
+  },
+  "public_safety": "Template only. Not a working profile."
+}
