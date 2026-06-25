@@ -2,6 +2,8 @@
 
 # Iran Network Field Guide
 
+<img src="assets/iran-network-field-guide-cover.png" alt="Iran Network Field Guide connectivity map" width="100%">
+
 **A practical map for testing connectivity under Iranian filtering.**
 
 [Overview](docs/01-iran-internet-overview.md) ·
