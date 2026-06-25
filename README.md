@@ -83,6 +83,25 @@ This guide helps researchers, VPN operators, circumvention-tool builders, and fi
 | Screenshots with sensitive fields | They can expose values while still missing the technical failure stage |
 | Vague "works" or "does not work" claims | They cannot guide route-family selection without stage and context |
 
+## Current Field Snapshot
+
+Observed on 25 June 2026 with Happ on Mobinnet internet in Iran. Config names and ping numbers are omitted. This is a single field snapshot, not a universal recommendation.
+
+| Order | Protocol | Port | Observed status |
+|---:|---|---:|---|
+| 1 | VLESS / TCP / TLS | 7445 | Best observed |
+| 2 | VLESS / WS / TLS | 443 | Responsive, mixed quality |
+| 3 | VLESS / TCP / REALITY | 6102 | Responsive |
+| 4 | VLESS / TCP / TLS | 7444 | Responsive |
+| 5 | VLESS / TCP / REALITY | 8449 | Responsive |
+| 6 | VLESS / TCP / REALITY | 8446 | Responsive |
+| 7 | VLESS / TCP / REALITY | 6101 | Responsive |
+| 8 | VLESS / TCP / REALITY | 8447 | Responsive |
+| 9 | VLESS / WS / TLS | 2054 | Responsive |
+| 10 | VLESS / WS / TLS | 2055 | Responsive |
+| 11 | VLESS / WS / TLS | 8448 | Responsive |
+| 12 | VLESS / XHTTP / TLS | 443 | Inconsistent |
+
 ## Route Family Snapshot
 
 | Route family | Best use | Common risk | Practical status |
