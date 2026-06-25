@@ -1,57 +1,123 @@
+<div align="center">
+
 # Iran Network Field Guide
 
-Public field guide for understanding, testing, and discussing internet disruption and censorship in Iran without publishing live infrastructure details.
+**A practical map for testing connectivity under Iranian filtering.**
 
-This repository is built from sanitized project notes, field observations, and public research synthesis. It does not contain active server addresses, domains, credentials, subscription links, QR codes, private logs, cookies, account identifiers, or provider-specific operational details.
+[Overview](docs/01-iran-internet-overview.md) ·
+[Choose a route](guides/choosing-a-route-family.md) ·
+[Run tests](guides/testing-from-iran.md) ·
+[Route matrix](docs/13-route-family-matrix.md) ·
+[Report safely](templates/field-report-template.md)
 
-## Purpose
+</div>
 
-Iran's connectivity problems are not one problem. Different users can see different failures on the same day depending on operator, city, network type, time window, protocol, endpoint reputation, DNS path, UDP handling, CDN edge, and client app behavior.
+---
 
-This repo is meant to help people outside Iran understand what is being observed and help testers inside Iran collect safe, comparable results.
+## What This Helps With
+
+Iran connectivity failures are rarely one clean block. The same route can behave differently by operator, city, network type, time window, client app, DNS path, CDN edge, endpoint reputation, UDP handling, and TLS behavior.
+
+This guide gives researchers, operators, and testers a shared language for answering four practical questions:
+
+| Question | Where to start |
+|---|---|
+| What kind of failure is this? | [Censorship mechanisms](docs/02-censorship-mechanisms.md) |
+| Which route family should we test next? | [Route family matrix](docs/13-route-family-matrix.md) |
+| Which client apps can realistically use it? | [Client compatibility](docs/06-client-compatibility.md) |
+| How do we collect clean field results? | [Testing from Iran](guides/testing-from-iran.md) |
+
+## Fast Path
+
+1. Read the [overview](docs/01-iran-internet-overview.md) to understand the network states.
+2. Match symptoms with [choosing a route family](guides/choosing-a-route-family.md).
+3. Run a staged probe with [connectivity_probe.py](tools/connectivity_probe.py).
+4. Summarize the result with [result_summarizer.py](tools/result_summarizer.py).
+5. Share only a sanitized report using the [field report template](templates/field-report-template.md).
+
+## Failure Stage Map
+
+| Stage | What it means | Useful next move |
+|---|---|---|
+| DNS | Hostname does not resolve or resolves inconsistently | Compare resolvers and record answers |
+| TCP | Endpoint or port cannot be reached | Compare provider, CDN, or relay paths |
+| TLS | Handshake fails after TCP connects | Review SNI, certificate, ALPN, and fingerprint behavior |
+| HTTP | Fallback page or upgrade path fails | Check Host, path, CDN rules, and origin behavior |
+| UDP/QUIC | UDP-style transport fails or stalls | Compare with a TCP branch before promoting it |
+| Proxy/app | Connection opens but useful traffic fails | Record client version, route family, and user-visible behavior |
+
+## Route Family Snapshot
+
+| Route family | Best use | Common risk | Practical status |
+|---|---|---|---|
+| DNS tunnel plus UDP relay | Full-device Android and call-like traffic when DNS paths survive | Endpoint visibility and resolver behavior | Strong private field signal |
+| Direct TLS camouflage | Fast ordinary-filtering route | Endpoint or provider reputation | Useful fast branch |
+| WebSocket/TLS CDN | Common-client compatibility with CDN indirection | Old WebSocket fingerprints and path mismatch | Practical, needs careful setup |
+| XHTTP-style transport | Newer HTTP-shaped experiments | Uneven client support | Staged experiment |
+| CDN edge comparison | Per-operator edge behavior testing | Candidate edges age quickly | Use as a measurement method |
+| Google/API relay | Whitelist-like periods where selected platforms remain reachable | Quotas, latency, account risk | Useful fallback research |
+| Domestic-service/WebRTC relay | Web and messaging in whitelist-like states | Metadata exposure and unstable calls | Emergency web/messaging branch |
+| Fragmentation or DPI desync | Lab testing against traffic classification | Platform privileges and version drift | Lab-only unless common clients support it |
+
+## Tools
+
+Run only against endpoints you own or are explicitly authorized to test.
+
+```bash
+python tools/connectivity_probe.py --hostname EXAMPLE_HOSTNAME --route-family "WebSocket/TLS CDN"
+```
+
+```bash
+python tools/cloudflare_edge_probe.py --hostname EXAMPLE_HOSTNAME --ip EXAMPLE_CDN_EDGE_IP
+```
+
+```bash
+python tools/result_summarizer.py data/examples/sanitized-results.json
+```
+
+```bash
+python tools/redaction_scan.py .
+```
 
 ## Evidence Labels
 
-Claims in this repo use these labels:
-
-- Confirmed from project field notes: observed in the private project notes, then rewritten without live identifiers.
-- Confirmed from upstream source/docs: based on upstream project documentation or source-code behavior.
-- Inference: engineering conclusion from known protocol behavior or multiple observations.
-- Unverified field report: reported by testers or public posts but not independently repeated.
-- Unknown: not enough evidence.
-
-## What Is In Scope
-
-- Censorship and failure-mode taxonomy.
-- Route-family analysis, not private route disclosure.
-- Client compatibility notes for common Android and desktop proxy apps.
-- Cloudflare/CDN edge behavior as a design and testing topic.
-- DNS, UDP, QUIC, TLS, WebSocket, XHTTP, traffic fingerprinting, fragmentation, and active-probing concepts.
-- Public-safe diagnostic scripts that test only endpoints owned or explicitly authorized by the person running them.
-
-## What Is Out Of Scope
-
-- Live endpoints, domains, account names, provider names, credentials, UUIDs, keys, cookies, subscription links, QR codes, and private user logs.
-- Instructions for Tor or Tor-dependent systems.
-- Mass scanning, third-party endpoint testing, or publication of bypass profiles for live private infrastructure.
+| Label | Meaning |
+|---|---|
+| Confirmed from project field notes | Observed in private field work, then rewritten as public route-family guidance |
+| Confirmed from upstream source/docs | Based on upstream documentation or source behavior |
+| Inference | Engineering conclusion from protocol behavior or repeated observations |
+| Unverified field report | Reported but not independently repeated |
+| Unknown | Not enough evidence |
 
 ## Repository Map
 
-- `docs/`: technical overview and synthesis.
-- `guides/`: practical testing and reporting guides.
-- `templates/`: placeholders for safe examples and planning.
-- `tools/`: local diagnostic scripts.
-- `data/examples/`: sanitized sample outputs.
-- `.github/`: issue templates and local validation workflow.
+| Path | Purpose |
+|---|---|
+| `docs/` | Technical overview, mechanisms, route-family analysis, open questions |
+| `guides/` | Field testing, route selection, practical reporting |
+| `templates/` | Placeholder profiles, test matrices, report templates |
+| `tools/` | Local diagnostics and redaction checks |
+| `data/examples/` | Sanitized sample outputs |
 
-## Safe Starting Points
+## Scope
 
-1. Read `docs/01-iran-internet-overview.md`.
-2. Read `docs/00-source-and-safety-method.md` to understand how private material was sanitized.
-3. Use `docs/13-route-family-matrix.md` and `guides/choosing-a-route-family.md` to match symptoms to route families.
-4. Use `guides/testing-from-iran.md` for a safe test workflow.
-5. Use `tools/connectivity_probe.py` only on hostnames you own or are authorized to test.
+This project documents methods, route families, and measurement workflows. It does not publish live deployments.
 
-## Public Safety Rule
+Tor-dependent workflows are out of scope; see [the scope note](docs/12-no-tor-scope-note.md).
 
-If a value could let someone identify, block, probe, hijack, or burn a real deployment, do not publish it. Use placeholders such as `EXAMPLE_HOSTNAME`, `EXAMPLE_IP`, `EXAMPLE_UUID`, and `EXAMPLE_PATH`.
+## Contributing
+
+Good contributions are specific, evidence-labeled, and practical:
+
+- A sanitized field report.
+- A client compatibility correction.
+- A route-family failure analysis.
+- A safer diagnostic workflow.
+- A clearer explanation for people outside Iran.
+
+Before submitting, run:
+
+```bash
+python tools/redaction_scan.py .
+python -m py_compile tools/*.py
+```
