@@ -2,6 +2,8 @@
 
 Use this guide to collect comparable results without exposing private deployments.
 
+For route promotion decisions, pair this with the [operator playbook](operator-playbook.md).
+
 ## Before Testing
 
 1. Confirm you are testing only endpoints you own or are authorized to test.
@@ -48,6 +50,30 @@ Use one primary label:
 - `random-reset`
 - `client-import`
 - `works`
+
+## Comparable Test Pair
+
+When comparing route families, keep these fields the same:
+
+- Tester.
+- Operator.
+- Network type.
+- Time window.
+- Client app and version.
+- Test order.
+- User-visible behavior checks.
+
+Change only the route-family branch being tested. If several fields changed at once, label the result as inconclusive.
+
+## Stop-Testing Rules
+
+Stop and mark the result clearly when:
+
+- DNS fails and no later stage can be tested.
+- TCP fails repeatedly on the same branch and network.
+- TLS fails after TCP succeeds.
+- The app imports a profile but drops required fields.
+- The route works for web only and the goal requires upload or calls.
 
 ## Safety
 

@@ -36,3 +36,11 @@ Public recommendation:
 ## Active Probing
 
 Inference: If an endpoint behaves like a proxy when probed by unknown clients, it can be classified faster. Real fallback behavior and origin protection reduce but do not eliminate this risk.
+
+## Public-Source Alignment
+
+Confirmed from public source: Project X and sing-box documentation show that transport method, transport security, TLS, ALPN, and low-level network settings are distinct fields that clients may or may not preserve.
+
+Confirmed from public source: Cloudflare's WebSocket and tunnel documentation shows that HTTP-shaped and WebSocket-shaped paths have platform behavior and constraints. This supports testing CDN/WebSocket behavior as a route property, not as a generic guarantee.
+
+See [Public Research Sources](14-public-research-sources.md) for source links.

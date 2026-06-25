@@ -29,5 +29,5 @@ Public reports should remove:
 - Endpoint values.
 - Account identifiers.
 - Client import material.
-- User-specific subscription names.
+- User-specific profile names.
 - Cookies and logs with identifiers.

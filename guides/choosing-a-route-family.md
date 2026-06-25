@@ -1,5 +1,7 @@
 # Choosing A Route Family
 
+Use this guide after identifying the failure stage. For promotion, rejection, and user-readiness rules, use the [operator playbook](operator-playbook.md).
+
 ## Symptom-To-Route Guide
 
 | Symptom | First route families to compare | Notes |
@@ -23,3 +25,17 @@ Inference: A resilient setup should keep independent branches:
 5. A lab-only branch for advanced DPI experiments.
 
 Do not replace a working branch with an experiment. Test additive candidates first.
+
+## Comparison Rule
+
+Pick one control branch and one candidate branch. Test them from the same network, with the same client app, during the same time window. If the candidate only improves a result from outside Iran or only improves a different failure stage, do not promote it.
+
+## Quick Reject Rules
+
+Reject the route-family and client combination when:
+
+- The app imports the profile but drops fields the route requires.
+- The route connects but useful traffic fails.
+- A call-capable label is used without a call test.
+- UDP behavior is assumed from a TCP-only test.
+- The result cannot be repeated by another tester or time window.

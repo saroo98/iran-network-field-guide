@@ -1,6 +1,6 @@
 # Security Policy
 
-Do not submit active endpoint details, account identifiers, credentials, cookies, private logs, subscription material, QR codes, or private user information.
+Do not submit active endpoint details, account identifiers, credentials, cookies, private logs, profile bundles, QR codes, or private user information.
 
 Safe reports should use placeholders:
 

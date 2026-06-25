@@ -38,4 +38,4 @@ The public repo must not say:
 
 - Which active endpoint, account, provider, profile, route name, path, key, or user cohort was used.
 - Which live clean edge candidates were tested.
-- Which exact private subscription or import material exists.
+- Which exact private profile or import material exists.

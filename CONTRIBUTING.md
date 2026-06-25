@@ -21,7 +21,7 @@ Contributions are welcome if they preserve user safety and evidence quality.
 ## Not Accepted
 
 - Live private profiles.
-- Working subscription or import links.
+- Working profile bundles or import links.
 - Real user identifiers.
 - Endpoint lists collected by scanning third parties.
 - Provider-specific private deployment details.

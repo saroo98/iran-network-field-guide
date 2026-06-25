@@ -2,12 +2,13 @@
 
 # Iran Network Field Guide
 
-<img src="assets/iran-network-field-guide-cover.png" alt="Iran Network Field Guide connectivity map" width="100%">
+<img src="assets/iran-network-field-guide-cover.png" alt="Iran connectivity testing map for VPN route families, DNS, TCP, TLS, HTTP, UDP, QUIC, and CDN edge measurement" width="100%">
 
-**A practical map for testing connectivity under Iranian filtering.**
+**A practical field guide for Iran connectivity testing, VPN route-family decisions, and censorship-resilience measurement.**
 
-[Overview](docs/01-iran-internet-overview.md) ·
+[Start here](#start-here) ·
 [Choose a route](guides/choosing-a-route-family.md) ·
+[Operator playbook](guides/operator-playbook.md) ·
 [Run tests](guides/testing-from-iran.md) ·
 [Route matrix](docs/13-route-family-matrix.md) ·
 [Report safely](templates/field-report-template.md)
@@ -18,24 +19,36 @@
 
 ## What This Helps With
 
-Iran connectivity failures are rarely one clean block. The same route can behave differently by operator, city, network type, time window, client app, DNS path, CDN edge, endpoint reputation, UDP handling, and TLS behavior.
+Iran connectivity failures are rarely one clean block. The same route can behave differently by operator, city, network type, time window, client app, DNS path, CDN edge, endpoint reputation, UDP handling, QUIC handling, and TLS behavior.
 
-This guide gives researchers, operators, and testers a shared language for answering four practical questions:
+This guide helps researchers, VPN operators, circumvention-tool builders, and field testers answer practical questions:
 
 | Question | Where to start |
 |---|---|
 | What kind of failure is this? | [Censorship mechanisms](docs/02-censorship-mechanisms.md) |
-| Which route family should we test next? | [Route family matrix](docs/13-route-family-matrix.md) |
+| Which VPN route family should be tested next? | [Choosing a route family](guides/choosing-a-route-family.md) |
+| How should a route be promoted or rejected? | [Operator playbook](guides/operator-playbook.md) |
 | Which client apps can realistically use it? | [Client compatibility](docs/06-client-compatibility.md) |
-| How do we collect clean field results? | [Testing from Iran](guides/testing-from-iran.md) |
+| How do we collect comparable field results? | [Testing from Iran](guides/testing-from-iran.md) |
+
+## Start Here
+
+| Reader path | First document | Useful outcome |
+|---|---|---|
+| Diagnose a failed connection | [Testing from Iran](guides/testing-from-iran.md) | Identify whether the failure is DNS, TCP, TLS, HTTP, UDP/QUIC, proxy, or app behavior |
+| Choose a route family | [Choosing a route family](guides/choosing-a-route-family.md) | Compare route families by symptom instead of guessing by protocol name |
+| Improve an operating workflow | [Operator playbook](guides/operator-playbook.md) | Promote only routes with repeated, comparable, sanitized evidence |
+| Collect a safe field report | [Field report template](templates/field-report-template.md) | Share useful observations without live values |
+| Compare client support | [Client compatibility](docs/06-client-compatibility.md) | Check whether a common app preserves the fields a route needs |
 
 ## Fast Path
 
 1. Read the [overview](docs/01-iran-internet-overview.md) to understand the network states.
 2. Match symptoms with [choosing a route family](guides/choosing-a-route-family.md).
-3. Run a staged probe with [connectivity_probe.py](tools/connectivity_probe.py).
-4. Summarize the result with [result_summarizer.py](tools/result_summarizer.py).
-5. Share only a sanitized report using the [field report template](templates/field-report-template.md).
+3. Use the [operator playbook](guides/operator-playbook.md) to pick two comparable branches.
+4. Run a staged probe with [connectivity_probe.py](tools/connectivity_probe.py).
+5. Summarize the result with [result_summarizer.py](tools/result_summarizer.py).
+6. Share only a sanitized report using the [field report template](templates/field-report-template.md).
 
 ## Failure Stage Map
 
@@ -47,6 +60,28 @@ This guide gives researchers, operators, and testers a shared language for answe
 | HTTP | Fallback page or upgrade path fails | Check Host, path, CDN rules, and origin behavior |
 | UDP/QUIC | UDP-style transport fails or stalls | Compare with a TCP branch before promoting it |
 | Proxy/app | Connection opens but useful traffic fails | Record client version, route family, and user-visible behavior |
+
+## What To Look For
+
+| Signal | Why it matters |
+|---|---|
+| Failure stage | Prevents treating DNS, TLS, UDP, and app failures as one generic block |
+| Operator and network type | Iran filtering can differ by mobile, fixed, Wi-Fi, region, and operator |
+| Client app and core version | Some apps import a profile but drop route-critical fields |
+| DNS, TCP, TLS, HTTP, UDP/QUIC results | A public fallback working over TCP does not prove UDP or proxy traffic works |
+| User-visible behavior | Web, messaging, upload, voice messages, calls, and idle stability can fail differently |
+| Repeated time windows | One success is a signal, not proof of stability |
+
+## What Not To Trust Alone
+
+| Weak signal | Why it is not enough |
+|---|---|
+| One success report | It may be operator-specific, time-specific, or client-specific |
+| Generic speed tests | They do not identify censorship failure stage or route capability |
+| A client "connected" icon | The route may connect but fail to move useful traffic |
+| Tests from outside Iran | They do not reproduce access-network filtering conditions |
+| Screenshots with sensitive fields | They can expose values while still missing the technical failure stage |
+| Vague "works" or "does not work" claims | They cannot guide route-family selection without stage and context |
 
 ## Route Family Snapshot
 
@@ -74,7 +109,11 @@ python tools/cloudflare_edge_probe.py --hostname EXAMPLE_HOSTNAME --ip EXAMPLE_C
 ```
 
 ```bash
-python tools/result_summarizer.py data/examples/sanitized-results.json
+python tools/result_summarizer.py data/examples/sanitized-results.json data/examples/sanitized-scenarios.json
+```
+
+```bash
+python tools/validate_examples.py data/examples
 ```
 
 ```bash
@@ -86,7 +125,7 @@ python tools/redaction_scan.py .
 | Label | Meaning |
 |---|---|
 | Confirmed from project field notes | Observed in private field work, then rewritten as public route-family guidance |
-| Confirmed from upstream source/docs | Based on upstream documentation or source behavior |
+| Confirmed from public source | Supported by public measurement data, upstream documentation, or source behavior |
 | Inference | Engineering conclusion from protocol behavior or repeated observations |
 | Unverified field report | Reported but not independently repeated |
 | Unknown | Not enough evidence |
@@ -95,10 +134,10 @@ python tools/redaction_scan.py .
 
 | Path | Purpose |
 |---|---|
-| `docs/` | Technical overview, mechanisms, route-family analysis, open questions |
-| `guides/` | Field testing, route selection, practical reporting |
+| `docs/` | Technical overview, mechanisms, route-family analysis, public sources, schema, open questions |
+| `guides/` | Field testing, route selection, practical operating workflow, user readiness |
 | `templates/` | Placeholder profiles, test matrices, report templates |
-| `tools/` | Local diagnostics and redaction checks |
+| `tools/` | Local diagnostics, example validation, redaction checks |
 | `data/examples/` | Sanitized sample outputs |
 
 ## Scope
@@ -121,5 +160,7 @@ Before submitting, run:
 
 ```bash
 python tools/redaction_scan.py .
+python tools/validate_examples.py data/examples
+python -m unittest discover -s tests
 python -m py_compile tools/*.py
 ```

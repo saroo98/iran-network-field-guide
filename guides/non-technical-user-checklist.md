@@ -10,6 +10,17 @@
 - Known compatible app.
 - A simple "stop testing" rule.
 
+## Readiness Checklist
+
+Before a normal user receives a test profile, confirm:
+
+- The intended app and version are known.
+- The expected result is written in one sentence.
+- The failure label is known.
+- A fallback branch exists.
+- No manual field editing is required after import.
+- The user knows when to stop and report the result.
+
 ## Before Sending A Profile
 
 Confirm:
@@ -34,3 +45,17 @@ Ask for:
 - Whether a short call worked, if call capability is being tested.
 
 Do not ask for screenshots that reveal endpoint fields.
+
+## Clear Failure Labels For Users
+
+Use simple labels in user-facing notes:
+
+- `does-not-import`
+- `connects-no-web`
+- `web-only`
+- `upload-stalls`
+- `messages-only`
+- `calls-fail`
+- `works`
+
+Map those notes back to the technical labels in [Testing From Iran](testing-from-iran.md) before publishing a report.

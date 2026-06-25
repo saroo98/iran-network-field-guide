@@ -26,7 +26,7 @@ The private project contained operational material that is not suitable for a pu
 - Credentials and cookies.
 - Private logs.
 - User labels tied to real subscriptions.
-- QR codes or subscription material.
+- QR codes or profile bundles.
 
 ## Interpretation
 

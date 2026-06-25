@@ -2,6 +2,8 @@
 
 This matrix compares public-safe route families. It is not a deployment recommendation for any private endpoint.
 
+Use this matrix with [Public Research Sources](14-public-research-sources.md), [Field Data Schema](15-field-data-schema.md), and the [Operator Playbook](../guides/operator-playbook.md).
+
 | Route family | Evidence label | Best use | Likely failure | Common clients | Public recommendation |
 |---|---|---|---|---|---|
 | DNS tunnel plus UDP relay | Confirmed from project field notes | Full-device Android and call-like traffic when DNS path survives | Visible endpoint exposure, resolver blocking, DNS traffic classification | App-specific DNS tunnel clients | Production candidate only when privately tested; public docs should stay generic. |

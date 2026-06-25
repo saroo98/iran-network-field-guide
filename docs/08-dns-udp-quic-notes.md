@@ -23,3 +23,11 @@ Testing requirement:
 Inference: HTTP/3 availability can vary by network and client. A public HTTPS fallback working over TCP does not prove QUIC works.
 
 The diagnostic scripts in `tools/` keep HTTP/3 optional because local client support varies.
+
+## Public-Source Alignment
+
+Confirmed from public source: OONI's HTTP/3 censorship research shows why HTTP/3 and UDP behavior should be tested independently from HTTPS-over-TCP behavior.
+
+Practical rule: A route family that depends on UDP, QUIC, or HTTP/3 should have a TCP-based comparison branch and a clear failure label when UDP stalls or fails.
+
+See [Public Research Sources](14-public-research-sources.md) for source links.

@@ -24,3 +24,11 @@ Confirmed from project field notes: Private tests showed that hiding the final s
 Inference: Modern filtering can classify traffic using TLS ClientHello fields, ALPN, SNI, packet sizes, timing, WebSocket behavior, QUIC behavior, and server fallback behavior. A route can fail even when the endpoint is reachable.
 
 Unknown: Which exact fingerprinting rules are active at a specific time on a specific Iranian operator. Test data must be collected per operator and date.
+
+## Public-Source Alignment
+
+Confirmed from public source: OONI's Iran reporting documents DNS-based tampering and TLS-level interference as observable censorship mechanisms. This supports recording DNS and TLS as separate failure stages instead of collapsing them into one "blocked" result.
+
+Confirmed from public source: OONI's HTTP/3 research found that HTTP/3 and HTTPS-over-TCP can be affected differently. This supports testing UDP/QUIC separately from TCP-based routes.
+
+See [Public Research Sources](14-public-research-sources.md) for source links and evidence-use rules.

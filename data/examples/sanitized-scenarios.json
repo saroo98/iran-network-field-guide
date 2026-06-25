@@ -1,0 +1,192 @@
+{
+  "schema": "iran-network-field-guide-results-v1",
+  "privacy": "Sanitized examples with placeholders only.",
+  "results": [
+    {
+      "timestamp_utc": "2026-06-25T00:00:00Z",
+      "route_family": "WebSocket/TLS CDN",
+      "hostname": "EXAMPLE_HOSTNAME",
+      "isp_operator": "EXAMPLE_ISP",
+      "region": "EXAMPLE_REGION",
+      "network_type": "mobile",
+      "client_app": "EXAMPLE_CLIENT_NAME",
+      "client_version": "EXAMPLE_VERSION",
+      "stages": [
+        {
+          "stage": "dns",
+          "status": "fail",
+          "latency_ms": 42,
+          "detail": "placeholder resolver mismatch"
+        },
+        {
+          "stage": "tcp",
+          "status": "not_tested",
+          "latency_ms": null,
+          "detail": "stopped after DNS failure"
+        }
+      ],
+      "error_stage": "dns",
+      "failure_label": "dns-fail"
+    },
+    {
+      "timestamp_utc": "2026-06-25T00:05:00Z",
+      "route_family": "Direct TLS camouflage",
+      "hostname": "EXAMPLE_HOSTNAME",
+      "isp_operator": "EXAMPLE_ISP",
+      "region": "EXAMPLE_REGION",
+      "network_type": "fixed",
+      "client_app": "EXAMPLE_CLIENT_NAME",
+      "client_version": "EXAMPLE_VERSION",
+      "stages": [
+        {
+          "stage": "dns",
+          "status": "ok",
+          "latency_ms": 18,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "tcp",
+          "status": "ok",
+          "latency_ms": 71,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "tls",
+          "status": "fail",
+          "latency_ms": 96,
+          "detail": "placeholder handshake reset"
+        }
+      ],
+      "error_stage": "tls",
+      "failure_label": "tls-fail"
+    },
+    {
+      "timestamp_utc": "2026-06-25T00:10:00Z",
+      "route_family": "QUIC or UDP proxy",
+      "hostname": "EXAMPLE_HOSTNAME",
+      "isp_operator": "EXAMPLE_ISP",
+      "region": "EXAMPLE_REGION",
+      "network_type": "mobile",
+      "client_app": "EXAMPLE_CLIENT_NAME",
+      "client_version": "EXAMPLE_VERSION",
+      "stages": [
+        {
+          "stage": "dns",
+          "status": "ok",
+          "latency_ms": 22,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "tcp",
+          "status": "ok",
+          "latency_ms": 63,
+          "detail": "tcp control branch worked"
+        },
+        {
+          "stage": "udp",
+          "status": "fail",
+          "latency_ms": 1800,
+          "detail": "placeholder UDP stall"
+        }
+      ],
+      "error_stage": "udp",
+      "failure_label": "udp-fail"
+    },
+    {
+      "timestamp_utc": "2026-06-25T00:15:00Z",
+      "route_family": "CDN edge comparison",
+      "hostname": "EXAMPLE_HOSTNAME",
+      "isp_operator": "EXAMPLE_ISP",
+      "region": "EXAMPLE_REGION",
+      "network_type": "wifi",
+      "client_app": "EXAMPLE_CLIENT_NAME",
+      "client_version": "EXAMPLE_VERSION",
+      "stages": [
+        {
+          "stage": "dns",
+          "status": "ok",
+          "latency_ms": 14,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "http",
+          "status": "ok",
+          "latency_ms": 131,
+          "detail": "fallback page reachable"
+        },
+        {
+          "stage": "proxy",
+          "status": "ok",
+          "latency_ms": 210,
+          "detail": "handshake opened"
+        },
+        {
+          "stage": "app",
+          "status": "fail",
+          "latency_ms": 2600,
+          "detail": "upload and media stalled"
+        }
+      ],
+      "error_stage": "app",
+      "failure_label": "grey-connect"
+    },
+    {
+      "timestamp_utc": "2026-06-25T00:20:00Z",
+      "route_family": "XHTTP-style transport",
+      "hostname": "EXAMPLE_HOSTNAME",
+      "isp_operator": "EXAMPLE_ISP",
+      "region": "EXAMPLE_REGION",
+      "network_type": "mobile",
+      "client_app": "EXAMPLE_CLIENT_NAME",
+      "client_version": "EXAMPLE_VERSION",
+      "stages": [
+        {
+          "stage": "dns",
+          "status": "ok",
+          "latency_ms": 20,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "app",
+          "status": "fail",
+          "latency_ms": 0,
+          "detail": "client dropped required transport fields"
+        }
+      ],
+      "error_stage": "app",
+      "failure_label": "client-import"
+    },
+    {
+      "timestamp_utc": "2026-06-25T00:25:00Z",
+      "route_family": "DNS tunnel plus UDP relay",
+      "hostname": "EXAMPLE_HOSTNAME",
+      "isp_operator": "EXAMPLE_ISP",
+      "region": "EXAMPLE_REGION",
+      "network_type": "mobile",
+      "client_app": "EXAMPLE_CLIENT_NAME",
+      "client_version": "EXAMPLE_VERSION",
+      "stages": [
+        {
+          "stage": "dns",
+          "status": "ok",
+          "latency_ms": 16,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "udp",
+          "status": "ok",
+          "latency_ms": 83,
+          "detail": "placeholder"
+        },
+        {
+          "stage": "app",
+          "status": "ok",
+          "latency_ms": 144,
+          "detail": "web, messaging, and short call test passed"
+        }
+      ],
+      "error_stage": "none",
+      "failure_label": "works"
+    }
+  ]
+}

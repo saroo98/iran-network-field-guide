@@ -2,7 +2,7 @@
 
 ## Compatibility Matrix
 
-| Route family | Common apps | Shareable config | Subscription output | Custom client needed | Non-technical user fit | Main compatibility break |
+| Route family | Common apps | Shareable config | Managed profile output | Custom client needed | Non-technical user fit | Main compatibility break |
 |---|---|---|---|---|---|---|
 | DNS tunnel plus UDP relay | App-specific DNS tunnel clients | Usually app-specific | Sometimes | Often yes | Medium if preconfigured | Import format and UDP relay support |
 | Direct TLS camouflage | Xray, v2rayNG, NekoBox, Hiddify-like clients | Usually yes | Yes | No | High if profile is tested | Unsupported flow, fingerprint, or TLS fields |

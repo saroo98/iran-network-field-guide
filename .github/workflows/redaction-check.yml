@@ -14,5 +14,9 @@ jobs:
           python-version: "3.x"
       - name: Run redaction scan
         run: python tools/redaction_scan.py .
+      - name: Validate examples
+        run: python tools/validate_examples.py data/examples
+      - name: Run tests
+        run: python -m unittest discover -s tests
       - name: Compile tools
         run: python -m py_compile tools/*.py

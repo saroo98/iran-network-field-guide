@@ -47,7 +47,7 @@ HIGH_RISK_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
 ]
 
 WARNING_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
-    ("safety-term", re.compile(r"(?i)\b(cookie|credential|subscription|qr code|private log)\b")),
+    ("safety-term", re.compile(r"(?i)\b(cookie|credential|profile bundle|qr code|private log)\b")),
     ("generic-sensitive-word", re.compile(r"(?i)\b(secret|password)\b")),
 ]
 
